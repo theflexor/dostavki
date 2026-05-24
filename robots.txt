@@ -9,4 +9,4 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-Sitemap: https://gruz.kg/sitemap.xml
+Sitemap: https://perevozki.kg/sitemap.xml

@@ -29,7 +29,7 @@
 ### Обязательно
 
 - [ ] **Оптимизировать картинки** — `home.jpg` (jpg) и `gidra.jpg` (jpg) слишком тяжёлые. Прогнать через [squoosh.app](https://squoosh.app) или конвертировать в WebP. Цель: < 300 КБ каждая.
-- [ ] Заменить домен `https://gruz.kg/` в:
+- [ ] Заменить домен `https://perevozki.kg/` в:
   - `<link rel="canonical">`
   - Open Graph и Twitter мета-тегах
   - JSON-LD (`@id`, `url`, `logo`, `image`)
@@ -37,7 +37,7 @@
   - `robots.txt`
 - [ ] Проверить номера телефонов (`+996 505 848 591` Таалай, `+996 709 259 979` Салават)
 - [ ] Заменить плейсхолдеры:
-  - Email: `hello@gruz.kg` → реальный
+  - Email: `hello@perevozki.kg` → реальный
   - Адрес: «ул. Чуй, 123» → реальный
   - Координаты в JSON-LD и geo-метатегах (lat/lng)
 - [ ] Обновить `<lastmod>` в `sitemap.xml`
