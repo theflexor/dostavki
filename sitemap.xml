@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://gruz.kg/</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://gruz.kg/home.jpg</image:loc>
+      <image:caption>Автопарк ГРУЗ.kg — Спринтеры с будкой</image:caption>
+      <image:title>Спринтер с будкой</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gruz.kg/gidra.jpg</image:loc>
+      <image:caption>Машина с гидролапатой — поднимает до 700 кг</image:caption>
+      <image:title>Машина с гидролапатой</image:title>
+    </image:image>
+  </url>
+</urlset>

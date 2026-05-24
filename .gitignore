@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# logs
+*.log
+
+# временные / бэкапы
+*.bak
+*.tmp
+~*
+
+# node (на случай если добавите сборку)
+node_modules/
+.cache/
+.parcel-cache/
+dist/
+build/

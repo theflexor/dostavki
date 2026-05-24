@@ -1,0 +1,20 @@
+{
+  "name": "ГРУЗ.kg — Грузоперевозки в Бишкеке",
+  "short_name": "ГРУЗ.kg",
+  "description": "Грузоперевозки по Бишкеку и регионам Кыргызстана. Спринтер, гидролапата, грузчики.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ff5a1f",
+  "lang": "ru-KG",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
