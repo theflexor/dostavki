@@ -1,5 +1,5 @@
 /* ============================================================
-   ГРУЗ.kg — чистая, профессиональная вёрстка
+   ПЕРЕВОЗКИ.kg — чистая, профессиональная вёрстка
    ============================================================ */
 
 :root {
@@ -110,9 +110,13 @@ input, button, textarea, select { font: inherit; }
   height: 72px;
 }
 .nav__logo {
-  font-weight: 800; font-size: 20px; letter-spacing: -.02em;
+  font-weight: 800; font-size: 17px; letter-spacing: -.02em;
+  white-space: nowrap;
 }
 .nav__logo em { color: var(--accent); font-style: normal; }
+@media (max-width: 480px) {
+  .nav__logo { font-size: 15px; }
+}
 
 .nav__links {
   display: flex; gap: 28px;
