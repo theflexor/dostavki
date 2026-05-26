@@ -65,6 +65,8 @@
       if (lenis) open ? lenis.stop() : lenis.start();
       document.body.style.overflow = open ? "hidden" : "";
     });
+    // закрытие меню при клике по ЛЮБОЙ ссылке (включая внешние пути типа /faq/)
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
   }
 
   /* ---------------- FADE-IN ПРИ СКРОЛЛЕ ---------------- */

@@ -227,6 +227,17 @@ input, button, textarea, select { font: inherit; }
 }
 .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 
+/* на тёмной CTA-секции — белая инверсия */
+.section--dark .btn--ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+}
+.section--dark .btn--ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+}
+
 .btn--full { width: 100%; }
 
 /* ============================================================
@@ -753,7 +764,7 @@ input[type="range"]::-moz-range-thumb {
   display: grid; gap: 20px;
   grid-template-columns: repeat(3, 1fr);
 }
-.fleet--2 { grid-template-columns: repeat(2, 1fr); max-width: 980px; }
+.fleet--2 { grid-template-columns: repeat(2, 1fr); max-width: 980px; margin-left: auto; margin-right: auto; }
 @media (max-width: 960px) {
   .fleet { grid-template-columns: 1fr 1fr; }
 }
