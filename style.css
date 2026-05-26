@@ -133,7 +133,9 @@ input, button, textarea, select { font: inherit; }
   height: 2px; width: 0; background: var(--accent);
   transition: width .3s var(--ease);
 }
-.nav__links a:hover::after { width: 100%; }
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after { width: 100%; }
+.nav__links a[aria-current="page"] { color: var(--accent); }
 
 .nav__cta {
   display: inline-flex; align-items: center; gap: 10px;
@@ -847,6 +849,35 @@ input[type="range"]::-moz-range-thumb {
   letter-spacing: -.01em;
 }
 
+/* "Подробнее →" в карточке транспорта */
+.veh__more {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px;
+  padding: 8px 0;
+  font-size: 13px; font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  align-self: flex-start;
+  transition: color .25s ease, border-color .25s ease, gap .25s ease;
+}
+.veh__more em {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 800;
+}
+.veh:hover .veh__more {
+  color: var(--accent);
+  border-color: var(--accent);
+  gap: 10px;
+}
+/* если .veh — это <a>, убираем подчёркивание и наследуем цвет */
+a.veh {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ============================================================
    ПРОЦЕСС
    ============================================================ */
@@ -1030,4 +1061,304 @@ input[type="range"]::-moz-range-thumb {
     transition-duration: .01ms !important;
   }
   [data-fade] { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   ВНУТРЕННИЕ SEO-СТРАНИЦЫ
+   ============================================================ */
+
+/* hero внутренней страницы — компактнее главной */
+.page-hero {
+  padding: calc(72px + 50px) 0 60px;
+  background:
+    radial-gradient(700px 400px at 85% -10%, rgba(255,90,31,.07), transparent 60%),
+    linear-gradient(180deg, #fff 0%, var(--paper) 100%);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero__title {
+  font-size: clamp(30px, 4.5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.08;
+  margin: 18px 0 18px;
+  max-width: 22ch;
+}
+.page-hero__accent {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.page-hero__sub {
+  font-size: clamp(15px, 1.2vw, 18px);
+  color: var(--ink-2);
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+.page-hero__cta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+/* хлебные крошки */
+.crumbs {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.crumbs a {
+  color: var(--ink-2);
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.crumbs a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.crumbs span:not(:last-child) {
+  margin: 0 8px;
+  color: var(--ink-3);
+}
+
+/* prose — длинный текст контента */
+.prose {
+  max-width: 760px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.prose p { margin-bottom: 16px; }
+.prose strong { color: var(--ink); font-weight: 700; }
+.prose ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 20px;
+}
+.prose ul li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 11px;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.prose-note {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+}
+.prose-note a {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--accent);
+}
+.prose-note a:hover { color: var(--accent); }
+
+/* нумерованный список (процесс) */
+.numbered-list {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  max-width: 760px;
+}
+.numbered-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.numbered-list li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: -2px;
+  width: 44px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .04em;
+}
+.numbered-list li strong { color: var(--ink); }
+
+/* таблица цен */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0;
+}
+.price-table th,
+.price-table td {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.price-table th {
+  background: var(--paper);
+  font-weight: 600;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.price-table tbody tr:last-child td { border-bottom: 0; }
+.price-table tbody tr:hover { background: rgba(255,90,31,.04); }
+.price-table b {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+@media (max-width: 640px) {
+  .price-table th, .price-table td { padding: 10px 12px; font-size: 13px; }
+  .price-table b { font-size: 14px; }
+}
+
+/* фичи / преимущества */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 720px) { .features { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .features { grid-template-columns: 1fr; } }
+
+.feature {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: 6px;
+  transition: border-color .25s ease, transform .25s ease;
+}
+.feature:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+}
+.feature b {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--accent);
+  line-height: 1;
+}
+.feature span {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* FAQ accordion */
+.faq {
+  display: flex; flex-direction: column; gap: 10px;
+  max-width: 860px;
+}
+.faq__item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .2s ease;
+}
+.faq__item[open] { border-color: var(--ink); }
+.faq__item summary {
+  padding: 20px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
+  user-select: none;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+";
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--ink-3);
+  transition: transform .3s ease, color .3s ease;
+  flex-shrink: 0;
+}
+.faq__item[open] summary::after {
+  content: "−";
+  color: var(--accent);
+  transform: rotate(180deg);
+}
+.faq__item summary:hover { background: var(--paper); }
+.faq__item p {
+  padding: 0 24px 22px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.faq__item strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 640px) {
+  .faq__item summary { padding: 16px 18px; font-size: 15px; }
+  .faq__item p { padding: 0 18px 18px; font-size: 14px; }
+}
+
+/* блок "смотрите также" */
+.related {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) { .related { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .related { grid-template-columns: 1fr; } }
+
+.related__card {
+  position: relative;
+  display: block;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.related__card:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -18px rgba(15,15,16,.12);
+}
+.related__num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .1em;
+}
+.related__card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.related__card p {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 0;
+}
+.related__arrow {
+  position: absolute;
+  right: 20px; bottom: 20px;
+  font-size: 22px;
+  color: var(--ink-3);
+  transition: color .25s ease, transform .25s ease;
+}
+.related__card:hover .related__arrow {
+  color: var(--accent);
+  transform: translate(4px, -4px);
 }
