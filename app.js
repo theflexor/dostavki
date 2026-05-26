@@ -217,4 +217,65 @@
 
   compute();
 
+  /* ---------------- ANALYTICS / CONVERSIONS ---------------- */
+  // Безопасный wrapper — работает даже если GA4 ещё не загрузился или ID не указан
+  function track(name, params) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", name, params || {});
+    }
+  }
+
+  // WhatsApp клики — конверсия
+  document.querySelectorAll('a[href*="wa.me"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      const phone = (el.href.match(/wa\.me\/(\d+)/) || [])[1] || "unknown";
+      track("whatsapp_click", {
+        event_category: "contact",
+        event_label: el.textContent.trim().slice(0, 60),
+        phone_number: phone,
+      });
+    });
+  });
+
+  // Клики по телефону
+  document.querySelectorAll('a[href^="tel:"]').forEach((el) => {
+    el.addEventListener("click", () => {
+      track("phone_click", {
+        event_category: "contact",
+        event_label: el.href.replace("tel:", ""),
+      });
+    });
+  });
+
+  // Главная конверсия — нажатие «Оформить заказ» в калькуляторе с указанием суммы
+  const $orderLink = document.querySelector("[data-out='link']");
+  if ($orderLink) {
+    $orderLink.addEventListener("click", () => {
+      const priceText = document.querySelector("[data-price]")?.textContent || "0";
+      const value = parseInt(priceText.replace(/\D/g, ""), 10) || 0;
+      track("generate_lead", {
+        event_category: "conversion",
+        event_label: "calculator_submit",
+        value: value,
+        currency: "KGS",
+        car: calc.carLabel,
+        hours: calc.hours,
+        loaders: calc.loaders,
+        furniture: calc.furniture,
+      });
+    });
+  }
+
+  // Использование калькулятора (хотя бы один клик по ползунку/табу) — soft conversion
+  let calcUsed = false;
+  document.querySelectorAll(".calc__tabs button, [data-input]").forEach((el) => {
+    el.addEventListener("change", markCalcUsed);
+    el.addEventListener("click", markCalcUsed);
+  });
+  function markCalcUsed() {
+    if (calcUsed) return;
+    calcUsed = true;
+    track("calc_interaction", { event_category: "engagement" });
+  }
+
 })();
