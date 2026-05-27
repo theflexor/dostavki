@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p perevozki-bishkek gruzchiki-bishkek kvartirniy-pereezd gidrolapata-arenda faq)",
+      "Bash(mv perevozki-bishkek.html perevozki-bishkek/index.html)",
+      "Bash(mv gruzchiki-bishkek.html gruzchiki-bishkek/index.html)",
+      "Bash(mv kvartirniy-pereezd.html kvartirniy-pereezd/index.html)",
+      "Bash(mv gidrolapata-arenda.html gidrolapata-arenda/index.html)"
+    ]
+  }
+}
