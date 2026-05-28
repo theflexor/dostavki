@@ -220,6 +220,9 @@
   compute();
 
   /* ---------------- ANALYTICS / CONVERSIONS ---------------- */
+  // ID конверсии Google Ads «Заявка через сайт»
+  const ADS_CONVERSION_ID = "AW-18192785326/JBgcCJPD-LQcEK6__-JD";
+
   // Безопасный wrapper — работает даже если GA4 ещё не загрузился или ID не указан
   function track(name, params) {
     if (typeof window.gtag === "function") {
@@ -227,7 +230,18 @@
     }
   }
 
-  // WhatsApp клики — конверсия
+  // Срабатывание Google Ads конверсии (с опциональной ценностью)
+  function fireAdsConversion(value) {
+    if (typeof window.gtag !== "function") return;
+    const params = { send_to: ADS_CONVERSION_ID };
+    if (value && value > 0) {
+      params.value = value;
+      params.currency = "KGS";
+    }
+    window.gtag("event", "conversion", params);
+  }
+
+  // WhatsApp клики — GA4 event + Google Ads конверсия
   document.querySelectorAll('a[href*="wa.me"]').forEach((el) => {
     el.addEventListener("click", () => {
       const phone = (el.href.match(/wa\.me\/(\d+)/) || [])[1] || "unknown";
@@ -236,16 +250,18 @@
         event_label: el.textContent.trim().slice(0, 60),
         phone_number: phone,
       });
+      fireAdsConversion();
     });
   });
 
-  // Клики по телефону
+  // Клики по телефону — GA4 event + Google Ads конверсия
   document.querySelectorAll('a[href^="tel:"]').forEach((el) => {
     el.addEventListener("click", () => {
       track("phone_click", {
         event_category: "contact",
         event_label: el.href.replace("tel:", ""),
       });
+      fireAdsConversion();
     });
   });
 
@@ -265,6 +281,7 @@
         loaders: calc.loaders,
         furniture: calc.furniture,
       });
+      fireAdsConversion(value);
     });
   }
 

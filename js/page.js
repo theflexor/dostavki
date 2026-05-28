@@ -33,20 +33,29 @@
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* --------- GA4: трекинг WhatsApp / звонков --------- */
+  /* --------- GA4 + Google Ads конверсии --------- */
+  const ADS_CONVERSION_ID = "AW-18192785326/JBgcCJPD-LQcEK6__-JD";
+
   function track(name, params) {
     if (typeof window.gtag === "function") {
       window.gtag("event", name, params || {});
     }
   }
+  function fireAdsConversion() {
+    if (typeof window.gtag !== "function") return;
+    window.gtag("event", "conversion", { send_to: ADS_CONVERSION_ID });
+  }
+
   document.querySelectorAll('a[href*="wa.me"]').forEach((el) => {
     el.addEventListener("click", () => {
       track("whatsapp_click", { event_category: "contact", page: location.pathname });
+      fireAdsConversion();
     });
   });
   document.querySelectorAll('a[href^="tel:"]').forEach((el) => {
     el.addEventListener("click", () => {
       track("phone_click", { event_category: "contact", page: location.pathname });
+      fireAdsConversion();
     });
   });
 
